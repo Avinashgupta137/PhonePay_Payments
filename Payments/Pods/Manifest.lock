@@ -1,0 +1,16 @@
+PODS:
+  - PhonePePayment (2.6.2)
+
+DEPENDENCIES:
+  - PhonePePayment
+
+SPEC REPOS:
+  trunk:
+    - PhonePePayment
+
+SPEC CHECKSUMS:
+  PhonePePayment: e5bd3e5afc646d60fe63129466db837c43508632
+
+PODFILE CHECKSUM: 8898091d7ecef55390348da99783dd2465978abf
+
+COCOAPODS: 1.14.2

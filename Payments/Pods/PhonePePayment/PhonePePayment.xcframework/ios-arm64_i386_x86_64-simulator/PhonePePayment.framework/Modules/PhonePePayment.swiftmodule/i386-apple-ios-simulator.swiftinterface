@@ -1,0 +1,115 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
+// swift-module-flags: -target i386-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name PhonePePayment
+import CommonCrypto
+import CoreData
+import Foundation
+@_exported import PhonePePayment
+import Swift
+import UIKit
+import WebKit
+@objc public enum Environment : Swift.Int {
+  case stage
+  case uat
+  case production
+  case stage_simulation
+  case uat_simulation
+  public var description: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension Environment : Swift.CaseIterable {
+  public typealias AllCases = [PhonePePayment.Environment]
+  public static var allCases: [PhonePePayment.Environment] {
+    get
+  }
+}
+public typealias PPTransactionRequest = PhonePePayment.DPSTransactionRequest
+@objc public class DPSTransactionRequest : ObjectiveC.NSObject {
+  public init(body: Swift.String, apiEndPoint: Swift.String, checksum: Swift.String, headers: [Swift.String : Swift.String]?, callBackURL: Swift.String)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public protocol Equal {
+  var identifier: Swift.String { get }
+  func isEqualTo(_ to: PhonePePayment.Equal) -> Swift.Bool
+}
+public protocol PhonePeErrorProtocol : PhonePePayment.Equal, Swift.Error {
+  var code: Swift.String { get }
+  var localizedDescription: Swift.String { get }
+}
+public enum PPResultState {
+  case success
+  case failure(_: PhonePePayment.PhonePeErrorProtocol)
+  case interrupted(_: PhonePePayment.PhonePeErrorProtocol)
+}
+extension PPResultState : Swift.Equatable {
+  public static func == (lhs: PhonePePayment.PPResultState, rhs: PhonePePayment.PPResultState) -> Swift.Bool
+}
+public enum PPTransactionStatus : Swift.String {
+  case SUCCESS
+  case FAILED
+  case PENDING
+  case CANCELLED
+  case USER_CANCEL
+  case TIMED_OUT
+  case UNKNOWN
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum SDKType : Swift.String {
+  case native
+  case flutter
+  case react_native
+  case ionic
+  case cordova
+  case xamarin
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public typealias PPTransactionCompletion = (PhonePePayment.DPSTransactionRequest?, PhonePePayment.PPResultState) -> Swift.Void
+@available(*, deprecated, message: "PhonePeDPSDK class now deprecated. Please use PPPayment instead")
+public typealias PhonePeDPSDK = PhonePePayment.PPPayment
+@_inheritsConvenienceInitializers @objc final public class PPPayment : ObjectiveC.NSObject {
+  public static var enableDebugLogs: Swift.Bool {
+    get
+    set
+  }
+  public static var phonePeAppId: Swift.String?
+  public static var version: Swift.String?
+  final public func setAdditionalInfo(sdkType: PhonePePayment.SDKType)
+  public init(environment: PhonePePayment.Environment = .production, enableLogging: Swift.Bool? = nil, appId: Swift.String)
+  @available(*, deprecated, message: "init method now deprecated. Please use new method instead")
+  public init(environment: PhonePePayment.Environment = .production, enableLogging: Swift.Bool? = nil)
+  @available(*, deprecated, message: "init method now deprecated. Please use new method instead")
+  @objc convenience override dynamic public init()
+  public static func getPackageSignature() -> Swift.String
+  public static func isPhonePeInstalled() -> Swift.Bool
+  public static func isPaytmAppPresent() -> Swift.Bool
+  public static func isGPayAppPresent() -> Swift.Bool
+  public static func checkDeeplink(_ url: Foundation.URL) -> Swift.Bool
+  final public func startPhonePeTransactionRequest(transactionRequest request: PhonePePayment.PPTransactionRequest, on viewController: UIKit.UIViewController, animated: Swift.Bool, completion: @escaping PhonePePayment.PPTransactionCompletion)
+  final public func startPG(transactionRequest request: PhonePePayment.PPTransactionRequest, on viewController: UIKit.UIViewController, animated: Swift.Bool, completion: @escaping PhonePePayment.PPTransactionCompletion)
+  final public func handlePGResult(map: [Swift.String : Any], on viewController: UIKit.UIViewController, animated: Swift.Bool, completion: @escaping PhonePePayment.PPTransactionCompletion)
+  @objc deinit
+}
+extension PhonePePayment.Environment : Swift.Equatable {}
+extension PhonePePayment.Environment : Swift.Hashable {}
+extension PhonePePayment.Environment : Swift.RawRepresentable {}
+extension PhonePePayment.PPTransactionStatus : Swift.Equatable {}
+extension PhonePePayment.PPTransactionStatus : Swift.Hashable {}
+extension PhonePePayment.PPTransactionStatus : Swift.RawRepresentable {}
+extension PhonePePayment.SDKType : Swift.Equatable {}
+extension PhonePePayment.SDKType : Swift.Hashable {}
+extension PhonePePayment.SDKType : Swift.RawRepresentable {}
